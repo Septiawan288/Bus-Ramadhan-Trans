@@ -1,0 +1,656 @@
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --info-color: #17a2b8;
+    --bg-light: #f8f9fa;
+    --text-dark: #343a40;
+    --border-color: #e9ecef;
+    --gradient-header: linear-gradient(to right, #007bff, #0056b3);
+    
+    --dark-purple-bg: #5e35b1; /* Ungu yang lebih tua */
+    --light-purple-accent: #9c27b0; /* Ungu yang lebih muda */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--dark-purple-bg); /* Latar belakang ungu solid */
+    position: relative;
+    z-index: 1;
+}
+
+/* Container untuk animasi teks marquee */
+.marquee-container {
+    background-color: var(--light-purple-accent);
+    color: white;
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: fixed; /* Tetap di atas saat scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001; /* Pastikan di atas semua konten kecuali modal */
+}
+
+/* Gaya teks marquee yang berjalan */
+.marquee {
+    display: inline-block;
+    padding-left: 100%; /* Mulai dari luar layar */
+    animation: marquee 15s linear infinite; /* Kecepatan animasi, sesuaikan jika perlu */
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Keyframes untuk animasi marquee */
+@keyframes marquee {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* Overlay untuk latar belakang bus */
+/* Ini sekarang berada di bawah marquee-container */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Overlay gelap transparan */
+    z-index: 0; /* Di bawah konten dan marquee */
+}
+
+
+.container {
+    background-color: rgba(255, 255, 255, 0.95); 
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+    width: 100%;
+    max-width: 900px;
+    margin: 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2; /* Di atas latar belakang animasi dan overlay */
+    margin-top: 70px; /* Jarak dari marquee-container di atas */
+}
+
+.header {
+    background: linear-gradient(to right, #8A2BE2, #9932CC);
+    color: white;
+    padding: 25px 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+    margin: 10px 0 5px;
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+.header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.logo-icon {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    animation: bounceIn 1s ease-out;
+    color: #FFD700;
+}
+
+.card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    border: 1px solid var(--border-color);
+}
+
+h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 .fas {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.form-group label .fas {
+    margin-right: 5px;
+    color: var(--primary-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="number"] {
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.passenger-counts .form-group input[type="number"] {
+    width: 100px;
+    text-align: center;
+}
+
+.small-text {
+    font-size: 0.9em;
+    color: var(--secondary-color);
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn .fas {
+    margin-right: 8px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.jadwal-list .card-item {
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--info-color);
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.jadwal-list .card-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.jadwal-list .card-item h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.jadwal-list .card-item p {
+    margin: 5px 0;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.jadwal-list .card-item p strong {
+    color: var(--text-dark);
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--secondary-color);
+    padding: 20px;
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+.seat-selection-area {
+    margin-top: 25px;
+    padding: 20px;
+    border: 1px dashed var(--info-color);
+    border-radius: 8px;
+    background-color: rgba(23, 162, 184, 0.05);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.seat-selection-area h3 {
+    color: var(--info-color);
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.seat-selection-area .select-jadwal-hint {
+    color: var(--secondary-color);
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.seat-map {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    padding: 15px;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.seat {
+    background-color: #ccc;
+    color: white;
+    padding: 12px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.seat.available {
+    background-color: var(--success-color);
+}
+
+.seat.available:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.seat.selected {
+    background-color: var(--primary-color);
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.seat.occupied {
+    background-color: var(--secondary-color);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.seat-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.seat-legend .seat-item {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.seat-legend .available { background-color: var(--success-color); }
+.seat-legend .selected { background-color: var(--primary-color); }
+.seat-legend .occupied { background-color: var(--secondary-color); }
+
+.booking-summary-area {
+    margin-top: 25px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-light);
+    margin-bottom: 25px;
+}
+
+.booking-summary-area h3 {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.booking-summary-area p {
+    margin-bottom: 8px;
+    font-size: 1.05em;
+}
+
+.booking-summary-area p span {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.booking-summary-area .total-price-summary {
+    font-size: 1.3em;
+    color: var(--success-color);
+    font-weight: bold;
+    margin-top: 15px;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 15px;
+}
+
+
+.message-area {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.message-area.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.message-area.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message-area.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    position: relative;
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.modal-summary p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 8px;
+}
+
+.modal-summary p:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.modal-summary p strong {
+    color: var(--text-dark);
+}
+
+.modal-summary p span {
+    font-weight: normal;
+    color: var(--primary-color);
+}
+
+.modal-summary .total-price-summary {
+    font-size: 1.4em;
+    color: var(--success-color);
+    font-weight: bold;
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.modal-buttons .btn {
+    width: 48%;
+}
+
+/* Styling for History Section */
+.history-section {
+    margin-top: 30px;
+}
+
+.history-section h2 {
+    color: var(--secondary-color);
+}
+
+.history-section .card-item {
+    border-left: 5px solid var(--secondary-color);
+    padding: 15px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 10px; 
+}
+
+/* Gambar bus dihapus dari sini */
+.bus-thumbnail {
+    display: none; /* Pastikan tidak tampil */
+}
+
+.bus-thumbnail-placeholder {
+    display: none; /* Pastikan tidak tampil */
+}
+
+
+.booking-item-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+.booking-item-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: var(--primary-color);
+}
+.booking-item-header p {
+    margin: 0;
+    font-size: 0.85em;
+    color: var(--secondary-color);
+}
+
+.booking-bus-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; /* Ubah ke flex-start untuk rata kiri */
+    gap: 5px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border-color);
+}
+.booking-bus-info p {
+    margin: 0;
+    font-size: 0.9em;
+    text-align: left; /* Teks rata kiri */
+}
+
+.booking-details {
+    flex-grow: 1; 
+    width: 100%; 
+}
+.booking-details p {
+    font-size: 0.9em; 
+}
+
+
+.history-section .btn.cancel-booking-btn {
+    font-size: 0.85em; 
+    padding: 6px 12px; 
+    width: auto; 
+    margin-top: 10px; 
+    align-self: flex-end; 
+}
+
+
+.payment-section .radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.payment-section .radio-group input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.3);
+    accent-color: var(--primary-color);
+}
+
+.payment-section .radio-group label {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.payment-section .radio-group label .fas {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.payment-close-button {
+    color: #aaa;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 1; }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
