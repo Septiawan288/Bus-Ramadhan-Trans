@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus AKAP Ramadhan Trans - Pemesanan Tiket Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="marquee-container">
+        <div class="marquee">Ramadhan Trans - Selamat Mudik! Ramadhan Trans - Pesan Tiket Mudah! Ramadhan Trans - Aman dan Nyaman! </div>
+    </div>
+    <div class="container">
+        <header class="header">
+            <i class="fas fa-bus logo-icon"></i>
+            <h1>Bus AKAP Ramadhan Trans</h1>
+            <p>Pesan Tiket Online, Cepat & Nyaman</p>
+        </header>
+
+        <section class="card search-section">
+            <h2><i class="fas fa-search"></i> Cari Jadwal Bus</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="asal"><i class="fas fa-map-marker-alt"></i> Kota Asal:</label>
+                    <input type="text" id="asal" placeholder="Contoh: Jakarta">
+                </div>
+                <div class="form-group">
+                    <label for="tujuan"><i class="fas fa-bullseye"></i> Kota Tujuan:</label>
+                    <input type="text" id="tujuan" placeholder="Contoh: Surabaya">
+                </div>
+                <div class="form-group">
+                    <label for="tanggal"><i class="fas fa-calendar-alt"></i> Tanggal Keberangkatan:</label>
+                    <input type="date" id="tanggal">
+                </div>
+            </div>
+            <button id="searchBtn" class="btn btn-primary"><i class="fas fa-search"></i> Cari Bus</button>
+        </section>
+
+        <section class="card results-section">
+            <h2><i class="fas fa-list-alt"></i> Jadwal Tersedia</h2>
+            <div id="jadwalList" class="jadwal-list">
+                <p class="empty-state">Tidak ada jadwal yang ditemukan. Silakan lakukan pencarian.</p>
+            </div>
+        </section>
+
+        <section class="card booking-section">
+            <h2><i class="fas fa-ticket-alt"></i> Detail Pemesanan</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="namaPelanggan"><i class="fas fa-user"></i> Nama Lengkap:</label>
+                    <input type="text" id="namaPelanggan" placeholder="Masukkan nama Anda">
+                </div>
+                <div class="form-group">
+                    <label for="emailPelanggan"><i class="fas fa-envelope"></i> Email:</label>
+                    <input type="email" id="emailPelanggan" placeholder="Masukkan email Anda">
+                </div>
+                <div class="form-group">
+                    <label for="noTelpPelanggan"><i class="fas fa-phone"></i> Nomor Telepon:</label>
+                    <input type="tel" id="noTelpPelanggan" placeholder="Contoh: 081234567890">
+                </div>
+                <div class="form-group">
+                    <label for="pilihJadwal"><i class="fas fa-route"></i> Pilih Jadwal (ID Jadwal):</label>
+                    <input type="text" id="pilihJadwal" placeholder="Cth: 1001" list="jadwalOptions">
+                    <datalist id="jadwalOptions"></datalist>
+                </div>
+            </div>
+
+            <div class="form-grid passenger-counts">
+                <div class="form-group">
+                    <label for="jumlahDewasa"><i class="fas fa-male"></i> Dewasa:</label>
+                    <input type="number" id="jumlahDewasa" value="1" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="jumlahAnak"><i class="fas fa-child"></i> Anak (0-12 tahun):</label>
+                    <input type="number" id="jumlahAnak" value="0" min="0">
+                </div>
+            </div>
+
+            <div id="seatSelectionArea" class="seat-selection-area">
+                <h3><i class="fas fa-chair"></i> Pilih Kursi</h3>
+                <p class="select-jadwal-hint">Pilih ID Jadwal di atas untuk melihat pilihan kursi.</p>
+                <div class="seat-map" id="seatMap">
+                </div>
+                <div class="seat-legend">
+                    <span class="seat-item available"></span> Tersedia
+                    <span class="seat-item selected"></span> Dipilih
+                    <span class="seat-item occupied"></span> Terisi
+                </div>
+            </div>
+
+            <div class="card package-section">
+                <h3><i class="fas fa-box"></i> Informasi Barang / Paket</h3>
+                <p class="small-text">Isi jika Anda membawa barang/paket yang akan masuk bagasi.</p>
+                <div class="form-group">
+                    <label for="deskripsiPaket">Deskripsi Barang/Paket:</label>
+                    <input type="text" id="deskripsiPaket" placeholder="Cth: Koper, Kardus, Sepeda">
+                </div>
+                <div class="form-group">
+                    <label for="beratPaket">Berat Perkiraan (kg):</label>
+                    <input type="number" id="beratPaket" value="0" min="0">
+                </div>
+            </div>
+
+            <div class="card payment-section">
+                <h3><i class="fas fa-money-bill-wave"></i> Metode Pembayaran</h3>
+                <div class="form-group radio-group">
+                    <input type="radio" id="paymentCash" name="paymentMethod" value="Cash" checked>
+                    <label for="paymentCash"><i class="fas fa-hand-holding-dollar"></i> Tunai (Cash) - Bayar di Loket</label>
+                </div>
+            </div>
+
+            <div class="booking-summary-area" id="bookingSummaryArea">
+                <h3><i class="fas fa-file-invoice"></i> Ringkasan Pemesanan</h3>
+                <p>Jadwal: <span id="summaryJadwal">-</span></p>
+                <p>Penumpang: <span id="summaryPenumpang">-</span></p>
+                <p>Kursi Dipilih: <span id="summaryKursi">-</span></p>
+                <p>Barang/Paket: <span id="summaryPaket">-</span></p>
+                <p class="total-price-summary">Total Harga: <span id="summaryTotalHarga">-</span></p>
+            </div>
+
+            <button id="bookBtn" class="btn btn-success"><i class="fas fa-check-circle"></i> Konfirmasi & Pesan Tiket</button>
+        </section>
+
+        <div class="message-area" id="messageArea"></div>
+
+        <section class="card history-section">
+            <h2><i class="fas fa-history"></i> Riwayat Pemesanan</h2>
+            <div id="bookingHistoryList" class="jadwal-list">
+                <p class="empty-state">Belum ada pemesanan yang berhasil.</p>
+            </div>
+        </section>
+    </div>
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Konfirmasi Pemesanan Anda</h2>
+            <div id="modalSummary" class="modal-summary">
+            </div>
+            <div class="modal-buttons">
+                <button id="confirmBookingBtn" class="btn btn-success">Ya, Pesan Sekarang (Cash)</button>
+                <button id="cancelBookingBtn" class="btn btn-secondary">Batalkan Pemesanan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
